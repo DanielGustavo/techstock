@@ -1,8 +1,8 @@
-import { HTMLAttributes, PropsWithChildren } from 'react';
+import { HTMLProps, PropsWithChildren } from 'react';
 
 import * as S from './styles';
 
-type TButton = HTMLAttributes<HTMLButtonElement> &
+type TButton = HTMLProps<HTMLButtonElement> &
   PropsWithChildren & {
     outlined?: boolean;
     variation?: S.TButtonVariation;

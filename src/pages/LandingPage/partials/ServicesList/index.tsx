@@ -2,7 +2,11 @@ import FeatherIcon from 'feather-icons-react';
 
 import * as S from './styles';
 
-function ServicesList() {
+type TServicesList = {
+  openSignUpModal: () => void;
+};
+
+function ServicesList({ openSignUpModal }: TServicesList) {
   return (
     <S.Container>
       {cards.map((card, index) => (
@@ -18,8 +22,8 @@ function ServicesList() {
         </S.Card>
       ))}
 
-      <S.Card clickable>
-        <S.CardButton>
+      <S.Card clickable onClick={openSignUpModal}>
+        <S.CardButton onClick={openSignUpModal}>
           <FeatherIcon icon="chevron-right" strokeWidth={2} size={30} />
         </S.CardButton>
 

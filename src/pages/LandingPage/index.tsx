@@ -3,22 +3,46 @@ import * as S from './styles';
 import Button from '../../components/Button';
 
 import ServicesList from './partials/ServicesList';
+import { useState } from 'react';
+
 import EvaluationsList from './partials/EvaluationsList';
+import SignUpModal from '../../components/Modals/SignUpModal';
+import SignInModal from '../../components/Modals/SignInModal';
 
 import logo from '../../assets/Logo.svg';
 import heroImg from '../../assets/HeroImg.svg';
 
 function LandingPage() {
+  const [signUpModalOpen, setSignUpModalOpen] = useState(false);
+  const [signInModalOpen, setSignInModalOpen] = useState(false);
+
   return (
     <S.Container>
+      <SignUpModal
+        open={signUpModalOpen}
+        setOpen={setSignUpModalOpen}
+        openSignInModal={() => setSignInModalOpen(true)}
+      />
+      <SignInModal
+        open={signInModalOpen}
+        setOpen={setSignInModalOpen}
+        openSignUpModal={() => setSignUpModalOpen(true)}
+      />
+
       <S.Header>
         <img src={logo} />
 
         <div>
-          <Button outlined variation="light">
+          <Button
+            outlined
+            variation="light"
+            onClick={() => setSignInModalOpen(true)}
+          >
             Entrar
           </Button>
-          <Button variation="primary">Registrar-se</Button>
+          <Button variation="primary" onClick={() => setSignUpModalOpen(true)}>
+            Registrar-se
+          </Button>
         </div>
       </S.Header>
 
@@ -32,7 +56,9 @@ function LandingPage() {
             </p>
           </header>
 
-          <Button size="medium">Comece agora!</Button>
+          <Button size="medium" onClick={() => setSignUpModalOpen(true)}>
+            Comece agora!
+          </Button>
         </div>
 
         <img src={heroImg} />
@@ -47,7 +73,7 @@ function LandingPage() {
           </p>
         </header>
 
-        <ServicesList />
+        <ServicesList openSignUpModal={() => setSignUpModalOpen(true)} />
       </S.CenterSection>
 
       <S.CenterSection>
@@ -72,7 +98,9 @@ function LandingPage() {
           </p>
         </div>
 
-        <Button size="medium">Começar agora</Button>
+        <Button size="medium" onClick={() => setSignUpModalOpen(true)}>
+          Começar agora
+        </Button>
       </S.CTASection>
 
       <S.Footer>
