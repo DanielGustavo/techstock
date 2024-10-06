@@ -1,8 +1,8 @@
-import { HTMLProps, PropsWithChildren } from 'react';
+import { HTMLAttributes, HTMLProps, PropsWithChildren } from 'react';
 
 import * as S from './styles';
 
-type TButton = HTMLProps<HTMLButtonElement> &
+type TButton = Omit<HTMLProps<HTMLButtonElement>, 'size'> &
   PropsWithChildren & {
     outlined?: boolean;
     variation?: S.TButtonVariation;
@@ -34,7 +34,7 @@ function Button({
 
   return (
     <S.Container
-      {...rest}
+      {...(rest as HTMLAttributes<HTMLButtonElement>)}
       outlined={outlined}
       color={getColor()}
       background={getBackground()}

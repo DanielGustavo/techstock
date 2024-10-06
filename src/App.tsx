@@ -1,8 +1,9 @@
-import LandingPage from './pages/LandingPage';
+import StockPage from './pages/StockPage';
+
 import 'react-responsive-modal/styles.css';
 
 function App() {
-  return <LandingPage />;
+  return <StockPage />;
 }
 
 export default App;

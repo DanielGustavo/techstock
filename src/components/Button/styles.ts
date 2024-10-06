@@ -2,7 +2,7 @@ import { darken, lighten } from 'polished';
 import styled, { css } from 'styled-components';
 
 export type TButtonVariation = 'primary' | 'light';
-export type TButtonSize = 'small' | 'medium';
+export type TButtonSize = 'x-small' | 'small' | 'medium';
 
 type TContainer = {
   outlined: boolean;
@@ -14,6 +14,10 @@ type TContainer = {
 function getSize(size: TButtonSize) {
   if (size === 'medium') {
     return { font: '24px', padding: '14px 32px' };
+  }
+
+  if (size === 'x-small') {
+    return { font: '14px', padding: '12px 16px' };
   }
 
   return { font: '16px', padding: '14px 20px' };
@@ -63,16 +67,16 @@ export const Container = styled.button<TContainer>`
     color: ${({ color }) => lighten(0.1, color)};
 
     ${({ outlined, background }) => {
-    if (outlined) {
-      return css`
+      if (outlined) {
+        return css`
           outline-color: ${lighten(0.1, background)};
         `;
-    }
+      }
 
-    return css`
+      return css`
         background: ${lighten(0.1, background)};
       `;
-  }}
+    }}
   }
 
   &:active {
@@ -81,15 +85,15 @@ export const Container = styled.button<TContainer>`
     color: ${({ color }) => darken(0.1, color)};
 
     ${({ outlined, background }) => {
-    if (outlined) {
-      return css`
+      if (outlined) {
+        return css`
           outline-color: ${darken(0.1, background)};
         `;
-    }
+      }
 
-    return css`
+      return css`
         background: ${darken(0.1, background)};
       `;
-  }}
+    }}
   }
 `;
