@@ -1,20 +1,16 @@
-import * as S from './styles';
-
-import Sidebar from '../../components/Sidebar';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
+import TemplatePage from '../../components/TemplatePage';
+
+import * as S from './styles';
 
 function StockPage() {
   return (
-    <S.TemplateContainer>
-      <Sidebar />
-
-      <S.Container>
-        <Header subtitle="Analise seu estoque">
-          <Button size="x-small">Adicionar produto</Button>
-        </Header>
-      </S.Container>
-    </S.TemplateContainer>
+    <TemplatePage>
+      <Header subtitle="Analise seu estoque">
+        <Button size="x-small">Adicionar produto</Button>
+      </Header>
+    </TemplatePage>
   );
 }
 

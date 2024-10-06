@@ -1,4 +1,5 @@
 import { darken } from 'polished';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 type TNavButton = {
@@ -41,7 +42,7 @@ export const NavButtons = styled.nav`
   gap: 4px;
 `;
 
-export const NavButton = styled.a<TNavButton>`
+export const NavButton = styled(Link)<TNavButton>`
   width: 100%;
   padding: 8px 12px;
 

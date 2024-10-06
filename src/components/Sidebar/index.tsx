@@ -11,12 +11,12 @@ function Sidebar() {
         <img src={logo} />
 
         <S.NavButtons>
-          <S.NavButton selected>
+          <S.NavButton selected to="/stock">
             <FeatherIcon icon="package" />
             <span>Estoque</span>
           </S.NavButton>
 
-          <S.NavButton selected={false}>
+          <S.NavButton selected={false} to="/sales">
             <FeatherIcon icon="trending-up" />
             <span>Vendas</span>
           </S.NavButton>
@@ -24,7 +24,7 @@ function Sidebar() {
       </header>
 
       <footer>
-        <S.NavButton selected={false} as="button">
+        <S.NavButton selected={false} as="button" to="#">
           <FeatherIcon icon="log-out" />
           <span>Sair</span>
         </S.NavButton>
