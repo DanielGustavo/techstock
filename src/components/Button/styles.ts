@@ -1,7 +1,7 @@
 import { darken, lighten } from 'polished';
 import styled, { css } from 'styled-components';
 
-export type TButtonVariation = 'primary' | 'light';
+export type TButtonVariation = 'primary' | 'light' | 'error';
 export type TButtonSize = 'x-small' | 'small' | 'medium';
 
 type TContainer = {

@@ -55,6 +55,10 @@ const variations = {
       color: '#0A0A0A',
       background: '#FEFEFE',
     },
+    error: {
+      color: '#FEFEFE',
+      background: '#FF2231',
+    },
   },
   outlined: {
     primary: {
@@ -64,6 +68,10 @@ const variations = {
     light: {
       color: '#FEFEFE',
       background: '#FEFEFE',
+    },
+    error: {
+      color: '#FF2231',
+      background: '#FF2231',
     },
   },
 };

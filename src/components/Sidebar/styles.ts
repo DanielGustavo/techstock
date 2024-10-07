@@ -8,6 +8,8 @@ type TNavButton = {
 
 export const Container = styled.aside`
   background: #0a0a0a;
+  position: sticky;
+  top: 0;
 
   height: 100vh;
   overflow-y: auto;
