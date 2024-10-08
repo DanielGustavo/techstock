@@ -10,6 +10,16 @@ export const Container = styled.header`
     display: flex;
     gap: 8px;
   }
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  a {
+    color: #fefefe;
+  }
 
   div {
     display: flex;

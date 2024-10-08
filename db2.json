@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Smartwatch S22",
       "description": "Lorem ipsum dolor sit amet consectetur. Platea elementum vel egestas vitae faucibus iaculis elit dolor. Pharetra turpis est etiam at mi urna eleifend bibendum. Non aliquet aliquam est semper augue adipiscing scelerisque. Gravida orci maecenas iaculis non enim ultricies.",
       "price": 30,
@@ -13,7 +13,7 @@
       "thumbnail_pathname": null
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Mouse multilaser",
       "description": "Lorem ipsum dolor sit amet consectetur. Platea elementum vel egestas vitae faucibus iaculis elit dolor. Pharetra turpis est etiam at mi urna eleifend bibendum. Non aliquet aliquam est semper augue adipiscing scelerisque. Gravida orci maecenas iaculis non enim ultricies.",
       "price": 30,
@@ -25,7 +25,7 @@
       "thumbnail_pathname": null
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Mouse multilaser",
       "description": "Lorem ipsum dolor sit amet consectetur. Platea elementum vel egestas vitae faucibus iaculis elit dolor. Pharetra turpis est etiam at mi urna eleifend bibendum. Non aliquet aliquam est semper augue adipiscing scelerisque. Gravida orci maecenas iaculis non enim ultricies.",
       "price": 30,
@@ -37,7 +37,7 @@
       "thumbnail_pathname": null
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Mouse multilaser",
       "description": "Lorem ipsum dolor sit amet consectetur. Platea elementum vel egestas vitae faucibus iaculis elit dolor. Pharetra turpis est etiam at mi urna eleifend bibendum. Non aliquet aliquam est semper augue adipiscing scelerisque. Gravida orci maecenas iaculis non enim ultricies.",
       "price": 30,
@@ -49,7 +49,7 @@
       "thumbnail_pathname": null
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "Mouse multilaser",
       "description": "Lorem ipsum dolor sit amet consectetur. Platea elementum vel egestas vitae faucibus iaculis elit dolor. Pharetra turpis est etiam at mi urna eleifend bibendum. Non aliquet aliquam est semper augue adipiscing scelerisque. Gravida orci maecenas iaculis non enim ultricies.",
       "price": 30,
@@ -61,7 +61,7 @@
       "thumbnail_pathname": null
     },
     {
-      "id": "6",
+      "id": 6,
       "name": "Mouse multilaser",
       "description": "Lorem ipsum dolor sit amet consectetur. Platea elementum vel egestas vitae faucibus iaculis elit dolor. Pharetra turpis est etiam at mi urna eleifend bibendum. Non aliquet aliquam est semper augue adipiscing scelerisque. Gravida orci maecenas iaculis non enim ultricies.",
       "price": 30,
@@ -71,18 +71,16 @@
       },
       "quantity": 10,
       "thumbnail_pathname": null
+  }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "name": "Fifine"
     },
     {
-      "id": "7",
-      "name": "Mouse multilaser",
-      "description": "Lorem ipsum dolor sit amet consectetur. Platea elementum vel egestas vitae faucibus iaculis elit dolor. Pharetra turpis est etiam at mi urna eleifend bibendum. Non aliquet aliquam est semper augue adipiscing scelerisque. Gravida orci maecenas iaculis non enim ultricies.",
-      "price": 30,
-      "brand": {
-        "id": 2,
-        "name": "Multilaser"
-      },
-      "quantity": 10,
-      "thumbnail_pathname": null
+      "id": 2,
+      "name": "Multilaser"
     }
   ]
 }

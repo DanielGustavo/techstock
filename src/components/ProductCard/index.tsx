@@ -87,7 +87,7 @@ function ProductCard({ product, onDelete }: TProductCard) {
           )}
         </Button>
 
-        <Link to={`/products/${product.id}`}>
+        <Link to={`/product/${product.id}`}>
           <Button>Editar</Button>
         </Link>
       </S.Footer>

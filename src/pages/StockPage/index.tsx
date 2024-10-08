@@ -10,24 +10,25 @@ import { TProduct } from '../../services/techstock/loadProducts';
 
 import * as S from './styles';
 import ProductCard from '../../components/ProductCard';
+import { Link } from 'react-router-dom';
 
 function StockPage() {
   const [products, setProducts] = useState<TProduct[] | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   async function loadProducts() {
     try {
       setIsLoading(true);
 
       const result = await techstock.loadProducts();
-      setProducts(result);
+      setProducts(result ?? []);
     } finally {
       setIsLoading(false);
     }
   }
 
   useEffect(() => {
-    if (products !== undefined || isLoading) return;
+    if (products !== undefined) return;
 
     loadProducts();
   }, [products, isLoading]);
@@ -41,7 +42,9 @@ function StockPage() {
   return (
     <TemplatePage>
       <Header subtitle="Analise seu estoque">
-        <Button size="x-small">Adicionar produto</Button>
+        <Link to="/product">
+          <Button size="x-small">Adicionar produto</Button>
+        </Link>
       </Header>
 
       {isLoading && (

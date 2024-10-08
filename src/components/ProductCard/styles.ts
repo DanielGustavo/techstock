@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 16px;
   max-width: calc(50% - 8px);
+  min-width: calc(50% - 8px);
 
   border-radius: 10px;
   border: 1px solid #191919;
@@ -18,6 +19,7 @@ export const Container = styled.div`
 export const Body = styled.div`
   display: flex;
   gap: 32px;
+  justify-content: space-between;
   padding: 16px 16px 0px 16px;
 
   div {

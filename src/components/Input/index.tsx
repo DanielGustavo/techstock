@@ -1,18 +1,31 @@
-import { InputHTMLAttributes } from 'react';
+import React, { forwardRef, InputHTMLAttributes } from 'react';
 
 import * as S from './styles';
 
 type TInput = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
+  textarea?: boolean;
 };
 
-function Input({ label, ...rest }: TInput) {
+const Input: React.ForwardRefRenderFunction<HTMLInputElement, TInput> = (
+  { label, textarea, ...rest },
+  ref
+) => {
   return (
     <S.Container>
       <span>{label}</span>
-      <S.InputElement {...rest} />
+
+      {textarea ? (
+        <S.TextareaElement
+          {...(rest as InputHTMLAttributes<HTMLTextAreaElement>)}
+          rows={4}
+          ref={ref as any}
+        />
+      ) : (
+        <S.InputElement {...rest} ref={ref as any} />
+      )}
     </S.Container>
   );
-}
+};
 
-export default Input;
+export default forwardRef(Input);

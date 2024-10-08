@@ -28,3 +28,21 @@ export const InputElement = styled.input`
     color: #757575;
   }
 `;
+
+export const TextareaElement = styled.textarea`
+  border: 1px solid #3f3f3f;
+  outline: none;
+  border-radius: 10px;
+
+  padding: 16px 12px;
+  background: #161616;
+  resize: none;
+
+  color: #fefefe;
+  font-size: 14px;
+  font-weight: 300;
+
+  &::placeholder {
+    color: #757575;
+  }
+`;

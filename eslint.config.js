@@ -6,6 +6,8 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 
 const myRules = {
   'react/react-in-jsx-scope': 'off',
+  'no-explicit-any': 'off',
+  '@typescript-eslint/no-explicit-any': 'off',
 };
 
 export default [

@@ -34,6 +34,7 @@ function Button({
 
   return (
     <S.Container
+      type="button"
       {...(rest as HTMLAttributes<HTMLButtonElement>)}
       outlined={outlined}
       color={getColor()}
