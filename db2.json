@@ -82,5 +82,16 @@
       "id": 2,
       "name": "Multilaser"
     }
+  ],
+  "sales": [
+    { "id": 1, "name": "Venda top", "description": "massa viu", "discount": 12.5, "datetime": "10/10/2024 20:27", "totalValue": 33.4 },
+    { "id": 2, "name": null, "description": null, "discount": 0, "datetime": "10/10/2024 19:12", "totalValue": 33.4 },
+    { "id": 3, "name": "Venda top 2", "description": null, "discount": 2, "datetime": "10/10/2024 12:27", "totalValue": 33.4 },
+    { "id": 4, "name": "Venda top asd", "description": "massa viu", "discount": 12.5, "datetime": "10/09/2024 20:27", "totalValue": 33.4 },
+    { "id": 5, "name": null, "description": "massa viu", "discount": null, "datetime": "10/09/2024 20:27", "totalValue": 33.4 },
+    { "id": 6, "name": "Venda top qweq", "description": "massa viu", "discount": 12.5, "datetime": "10/09/2024 20:27", "totalValue": 33.4 },
+    { "id": 7, "name": "Venda top xvcv", "description": "massa viu", "discount": 12.5, "datetime": "10/08/2024 20:27", "totalValue": 33.4 },
+    { "id": 8, "name": null, "description": null, "discount": 1, "datetime": "10/08/2024 20:27", "totalValue": 33.4 },
+    { "id": 9, "name": null, "description": null, "discount": 2.5, "datetime": "10/08/2024 20:27", "totalValue": 33.4 }
   ]
 }

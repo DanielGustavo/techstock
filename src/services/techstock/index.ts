@@ -1,6 +1,7 @@
 export { api } from './api';
 export { loadProducts } from './loadProducts';
 export { loadProduct } from './loadProduct';
+export { loadSales } from './loadSales';
 export { deleteProduct } from './deleteProduct';
 export { loadBrands } from './loadBrands';
 export { createBrand } from './createBrand';

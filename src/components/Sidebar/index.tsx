@@ -11,12 +11,15 @@ function Sidebar() {
         <img src={logo} />
 
         <S.NavButtons>
-          <S.NavButton selected to="/stock">
+          <S.NavButton
+            selected={!!location.href.match(/\/stock|product/i)}
+            to="/stock"
+          >
             <FeatherIcon icon="package" />
             <span>Estoque</span>
           </S.NavButton>
 
-          <S.NavButton selected={false} to="/sales">
+          <S.NavButton selected={!!location.href.match(/\/sales/i)} to="/sales">
             <FeatherIcon icon="trending-up" />
             <span>Vendas</span>
           </S.NavButton>

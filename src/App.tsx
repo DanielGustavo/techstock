@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import StockPage from './pages/StockPage';
 import LandingPage from './pages/LandingPage';
 import ProductPage from './pages/ProductPage';
+import SalesPage from './pages/SalesPage';
 
 const router = createBrowserRouter([
   { path: '/', Component: LandingPage },
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       };
     },
   },
+  { path: '/sales', Component: SalesPage },
 ]);
 
 function App() {
