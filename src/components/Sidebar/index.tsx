@@ -19,7 +19,10 @@ function Sidebar() {
             <span>Estoque</span>
           </S.NavButton>
 
-          <S.NavButton selected={!!location.href.match(/\/sales/i)} to="/sales">
+          <S.NavButton
+            selected={!!location.href.match(/\/sales|sale/i)}
+            to="/sales"
+          >
             <FeatherIcon icon="trending-up" />
             <span>Vendas</span>
           </S.NavButton>

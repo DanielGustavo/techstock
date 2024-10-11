@@ -5,6 +5,7 @@ import StockPage from './pages/StockPage';
 import LandingPage from './pages/LandingPage';
 import ProductPage from './pages/ProductPage';
 import SalesPage from './pages/SalesPage';
+import SalePage from './pages/SalePage';
 
 const router = createBrowserRouter([
   { path: '/', Component: LandingPage },
@@ -22,6 +23,16 @@ const router = createBrowserRouter([
     },
   },
   { path: '/sales', Component: SalesPage },
+  { path: '/sale', Component: SalePage },
+  {
+    path: '/sale/:saleId',
+    Component: SalePage,
+    loader: (params) => {
+      return {
+        saleId: params.params.saleId ? params.params.saleId : undefined,
+      };
+    },
+  },
 ]);
 
 function App() {
