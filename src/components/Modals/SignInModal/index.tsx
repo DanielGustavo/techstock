@@ -33,7 +33,7 @@ function SignInModal({ openSignUpModal, ...rest }: TSignInModal) {
         <S.Form>
           <div className="inputs">
             <Input label="Nome" placeholder="Insira seu nome" />
-            <Input label="Senha" placeholder="Insira sua senha" />
+            <Input label="Senha" type="password" placeholder="Insira sua senha" />
           </div>
 
           <footer>

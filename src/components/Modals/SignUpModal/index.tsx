@@ -33,10 +33,15 @@ function SignUpModal({ openSignInModal, ...rest }: TSignUpModal) {
         <S.Form>
           <div className="inputs">
             <Input label="Nome" placeholder="Insira seu nome" />
-            <Input label="Senha" placeholder="Insira sua senha" />
+            <Input
+              label="Senha"
+              type="password"
+              placeholder="Insira sua senha"
+            />
             <Input
               label="Confirmação de senha"
               placeholder="Repita a sua senha"
+              type="password"
             />
           </div>
 
