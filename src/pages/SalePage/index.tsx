@@ -16,6 +16,7 @@ import { format } from 'date-fns';
 import { TProduct } from '../../services/techstock/loadProducts';
 import Select from '../../components/Select';
 import SaleProductCard from '../../components/SaleProductCard';
+import { TProductSale } from '../../services/techstock/loadSale';
 
 type TInputs = {
   name: string;
@@ -26,12 +27,15 @@ type TInputs = {
 
 function SalePage() {
   const [productsInSales, setProductsInSales] = useState<
-    TProduct[] | undefined
+    TProductSale[] | undefined
+  >(undefined);
+  const [initialProductsInSales, setInitialProductsInSales] = useState<
+    TProductSale[] | undefined
   >(undefined);
   const [products, setProducts] = useState<TProduct[] | undefined>(undefined);
-  const [selectedProduct, setSelectedProduct] = useState<TProduct | undefined>(
-    undefined
-  );
+  const [selectedProduct, setSelectedProduct] = useState<
+    TProductSale | undefined
+  >(undefined);
   const [sale, setSale] = useState<TSale | undefined>(undefined);
   const params = useLoaderData() as { saleId?: number };
 
@@ -63,6 +67,7 @@ function SalePage() {
       const result = await techstock.loadSale(params.saleId as number);
       setSale(result.sale);
       setProductsInSales(result.products);
+      setInitialProductsInSales([...result.products]);
       setIsFetching(false);
     })();
   }, []);
@@ -76,13 +81,24 @@ function SalePage() {
   async function onSubmit(inputs: TInputs) {
     setIsLoadingSubmit(true);
 
-    console.log({ inputs, productsInSales });
     if (!sale) {
       const res = await techstock.createSale(inputs, productsInSales ?? []);
       setIsLoadingSubmit(false);
       location.href = `/sale/${res.id}`;
     } else {
-      /* await techstock.updateSale({ ...sale, ...inputs }); */
+      const productsToDeleteInSales =
+        initialProductsInSales?.filter((initialProduct) => {
+          return !productsInSales?.find(
+            ({ saleproduct_id }) =>
+              initialProduct.saleproduct_id === saleproduct_id
+          );
+        }) ?? [];
+
+      await techstock.updateSale(
+        { ...sale, ...inputs },
+        productsInSales ?? [],
+        productsToDeleteInSales
+      );
       setSale({ ...sale, ...(inputs as any) });
       setIsLoadingSubmit(false);
     }

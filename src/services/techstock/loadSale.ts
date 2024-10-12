@@ -2,6 +2,10 @@ import { api } from './api';
 import { TProduct } from './loadProducts';
 import { TSale } from './loadSales';
 
+export type TProductSale = TProduct & {
+  saleproduct_id?: string
+}
+
 type TLoadSaleResponse = {
   sale: {
     id: number;
@@ -11,7 +15,7 @@ type TLoadSaleResponse = {
     date_time: string;
     totalValue: number;
   };
-  productSale: TProduct[];
+  productSale: TProductSale[];
 };
 
 export async function loadSale(id: number) {

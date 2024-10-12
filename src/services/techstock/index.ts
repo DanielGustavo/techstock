@@ -11,3 +11,4 @@ export { createBrand } from './createBrand';
 export { createProduct } from './createProduct';
 export { createSale } from './createSale';
 export { updateProduct } from './updateProduct';
+export { updateSale } from './updateSale';
