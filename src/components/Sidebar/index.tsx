@@ -5,6 +5,11 @@ import logo from '../../assets/Logo.svg';
 import * as S from './styles';
 
 function Sidebar() {
+  function logout() {
+    localStorage.setItem('user', '');
+    location.href = '/';
+  }
+
   return (
     <S.Container>
       <header>
@@ -30,7 +35,7 @@ function Sidebar() {
       </header>
 
       <footer>
-        <S.NavButton selected={false} as="button" to="#">
+        <S.NavButton selected={false} as="button" to="#" onClick={logout}>
           <FeatherIcon icon="log-out" />
           <span>Sair</span>
         </S.NavButton>

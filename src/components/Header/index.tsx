@@ -3,6 +3,7 @@ import { PropsWithChildren, ReactNode } from 'react';
 import * as S from './styles';
 import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom';
+import { getUser } from '../../utils/getUser';
 
 type THeader = PropsWithChildren & {
   subtitle: string | ReactNode;
@@ -10,6 +11,8 @@ type THeader = PropsWithChildren & {
 };
 
 function Header({ children, subtitle, backUrl }: THeader) {
+  const user = getUser();
+
   return (
     <S.Container>
       <S.TitleContainer>
@@ -20,7 +23,7 @@ function Header({ children, subtitle, backUrl }: THeader) {
         )}
 
         <div>
-          <h2>Olá, Daniel</h2>
+          <h2>Olá, {user?.name ?? ''}</h2>
           <h1>{subtitle}</h1>
         </div>
       </S.TitleContainer>

@@ -1,4 +1,5 @@
 import FeatherIcon from 'feather-icons-react';
+import ReactLoading from 'react-loading';
 
 import Modal, { TModal } from '../../Modal';
 import Input from '../../Input';
@@ -7,15 +8,48 @@ import Button from '../../Button';
 import logo from '../../../assets/Logo.svg';
 
 import * as S from './styles';
+import { useForm } from 'react-hook-form';
+import * as techstock from '../../../services/techstock';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 type TSignInModal = TModal & {
   openSignUpModal: () => void;
 };
 
+type TInputs = {
+  name: string;
+  password: string;
+};
+
 function SignInModal({ openSignUpModal, ...rest }: TSignInModal) {
-  function goSignIn() {
+  const { register, handleSubmit } = useForm<TInputs>();
+  const [isLoading, setIsLoading] = useState(false);
+
+  function goSignUp() {
     rest.setOpen(false);
     setTimeout(openSignUpModal, 300);
+  }
+
+  async function onSubmit(inputs: TInputs) {
+    if (isLoading) return;
+
+    if (!inputs.name.length || !inputs.password.length) {
+      toast('Preencha todos os campos', { type: 'error' });
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const user = await techstock.login(inputs.name, inputs.password);
+
+      localStorage.setItem('user', JSON.stringify(user));
+      location.href = '/stock';
+    } catch {
+      toast('Usuário ou senha errados', { type: 'error' });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -30,17 +64,36 @@ function SignInModal({ openSignUpModal, ...rest }: TSignInModal) {
           </div>
         </S.Header>
 
-        <S.Form>
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
           <div className="inputs">
-            <Input label="Nome" placeholder="Insira seu nome" />
-            <Input label="Senha" type="password" placeholder="Insira sua senha" />
+            <Input
+              label="Nome"
+              placeholder="Insira seu nome"
+              {...register('name')}
+            />
+            <Input
+              label="Senha"
+              type="password"
+              placeholder="Insira sua senha"
+              {...register('password')}
+            />
           </div>
 
           <footer>
-            <Button type="button">Entrar</Button>
+            <Button type="submit" disabled={isLoading}>
+              Entrar{' '}
+              {isLoading && (
+                <ReactLoading
+                  color="#0A0A0A"
+                  type="spin"
+                  height={15}
+                  width={15}
+                />
+              )}
+            </Button>
             <p>
               Ainda não tem uma conta?{' '}
-              <span onClick={goSignIn}>
+              <span onClick={goSignUp}>
                 Criar conta{' '}
                 <FeatherIcon icon="user-plus" strokeWidth={3} size={14} />
               </span>
