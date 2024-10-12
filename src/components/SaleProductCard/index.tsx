@@ -43,7 +43,7 @@ function SaleProductCard({ product, onChange, maxQuantity }: TSaleProductCard) {
 
           <S.Description>
             <header>
-              <b>{product.name}</b>
+              <b>{product.name ?? '???'}</b>
             </header>
 
             <ul>
@@ -51,7 +51,7 @@ function SaleProductCard({ product, onChange, maxQuantity }: TSaleProductCard) {
                 Preço: <span>R${product.price.toFixed(2)}</span>
               </li>
               <li>
-                Marca: <span>{product.brand?.name}</span>
+                Marca: <span>{product.brand?.name ?? '???'}</span>
               </li>
             </ul>
 

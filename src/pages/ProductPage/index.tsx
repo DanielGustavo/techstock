@@ -95,7 +95,7 @@ function ProductPage() {
         description: inputs.description,
         price: inputs.price,
         quantity: inputs.quantity,
-        idBrand: inputs.brand
+        idBrand: inputs.brand,
       });
       setIsLoadingSubmit(false);
       location.href = `/product/${res.id}`;
@@ -106,10 +106,20 @@ function ProductPage() {
         price: inputs.price,
         quantity: inputs.quantity,
         id: product.id,
-        idBrand: inputs.brand || product.brand.id
+        idBrand: inputs.brand || product.brand.id,
       });
-      setProduct({ ...product, ...(inputs as any) });
+      setProduct({
+        ...product,
+        ...(inputs as any),
+        price: inputs.price * 1.02,
+      });
       setIsLoadingSubmit(false);
+
+      if (inputs.quantity === 0) {
+        location.href = '/stock';
+      }
+
+      setValue('price', inputs.price * 1.02);
     }
   }
 
@@ -200,9 +210,9 @@ function ProductPage() {
             defaultValue={
               product
                 ? {
-                  value: product?.brand?.id,
-                  label: product?.brand?.name,
-                }
+                    value: product?.brand?.id,
+                    label: product?.brand?.name,
+                  }
                 : undefined
             }
           />
