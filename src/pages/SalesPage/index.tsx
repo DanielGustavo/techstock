@@ -23,7 +23,6 @@ function SalesPage() {
 
       const result = await techstock.loadSales();
       setSales(result ?? []);
-      console.log(result);
     } finally {
       setIsLoading(false);
     }
@@ -79,20 +78,20 @@ function SalesPage() {
         </S.EmptyContainer>
       )}
 
-      {sales && (
+      {sales?.length && (
         <S.Sales>
           {sales.map((sale, index) => {
             const previousSale = index > 0 ? sales[index - 1] : undefined;
 
             if (
               !previousSale ||
-              !isSameMonth(previousSale.datetime, sale.datetime)
+              !isSameMonth(previousSale.date_time, sale.date_time)
             )
               return (
                 <>
                   <h1>
-                    Vendas de {getMonthString(sale.datetime)}/
-                    {sale.datetime.getFullYear()}
+                    Vendas de {getMonthString(sale.date_time)}/
+                    {sale.date_time?.getFullYear()}
                   </h1>
                   <SaleCard {...sale} key={`${sale.id}${index}`} />
                 </>

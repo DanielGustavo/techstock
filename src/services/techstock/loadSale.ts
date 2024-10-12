@@ -1,13 +1,17 @@
 import { api } from './api';
+import { TProduct } from './loadProducts';
 import { TSale } from './loadSales';
 
 type TLoadSaleResponse = {
-  id: number;
-  name?: string;
-  description?: string;
-  discount?: number;
-  datetime: string;
-  totalValue: number;
+  sale: {
+    id: number;
+    name?: string;
+    description?: string;
+    discount?: number;
+    date_time: string;
+    totalValue: number;
+  };
+  productSale: TProduct[];
 };
 
 export async function loadSale(id: number) {
@@ -15,9 +19,9 @@ export async function loadSale(id: number) {
   const response = await api.get<TLoadSaleResponse>(`/sales/${id}`);
 
   const sale: TSale = {
-    ...response.data,
-    datetime: new Date(response.data.datetime),
+    ...response.data.sale,
+    date_time: new Date(response.data.sale.date_time),
   };
 
-  return sale;
+  return { sale, products: response.data.productSale };
 }

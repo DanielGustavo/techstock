@@ -7,7 +7,7 @@ export type TProduct = {
   quantity: number;
   thumbnail_pathname?: string;
   price: number;
-  brand?: {
+  brand: {
     id: number;
     name: string;
   };

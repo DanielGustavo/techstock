@@ -90,11 +90,24 @@ function ProductPage() {
     setIsLoadingSubmit(true);
 
     if (!product) {
-      const res = await techstock.createProduct(inputs);
+      const res = await techstock.createProduct({
+        name: inputs.name,
+        description: inputs.description,
+        price: inputs.price,
+        quantity: inputs.quantity,
+        idBrand: inputs.brand
+      });
       setIsLoadingSubmit(false);
       location.href = `/product/${res.id}`;
     } else {
-      await techstock.updateProduct({ ...product, ...inputs });
+      await techstock.updateProduct({
+        name: inputs.name,
+        description: inputs.description,
+        price: inputs.price,
+        quantity: inputs.quantity,
+        id: product.id,
+        idBrand: inputs.brand || product.brand.id
+      });
       setProduct({ ...product, ...(inputs as any) });
       setIsLoadingSubmit(false);
     }
@@ -187,9 +200,9 @@ function ProductPage() {
             defaultValue={
               product
                 ? {
-                    value: product?.brand?.id,
-                    label: product?.brand?.name,
-                  }
+                  value: product?.brand?.id,
+                  label: product?.brand?.name,
+                }
                 : undefined
             }
           />

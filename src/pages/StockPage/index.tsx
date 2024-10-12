@@ -60,7 +60,9 @@ function StockPage() {
       {!isLoading && !products?.length && (
         <S.EmptyContainer>
           <p>Nenhum produto cadastrado no estoque.</p>
-          <Button size="x-small">Adicionar Produto</Button>
+          <Link to="/product">
+            <Button size="x-small" onClick={() => { }}>Adicionar Produto</Button>
+          </Link>
         </S.EmptyContainer>
       )}
 

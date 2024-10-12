@@ -21,7 +21,7 @@ type TInputs = {
   name: string;
   description?: string;
   discount?: number;
-  datetime: string;
+  date_time: string;
 };
 
 function SalePage() {
@@ -37,20 +37,13 @@ function SalePage() {
 
   const [isFetching, setIsFetching] = useState(!!params?.saleId);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
+  const [isLoadingDeletion, setIsLoadingDeletion] = useState(false);
+  const [confirmingDeletion, setConfirmingDeletion] = useState(false);
 
   const { register, handleSubmit, watch } = useForm<TInputs>();
   const discountInputValue = watch('discount');
 
   const formRef = useRef<HTMLFormElement | undefined>();
-
-  useEffect(() => {
-    if (productsInSales !== undefined || !params?.saleId) return;
-
-    (async () => {
-      const result = await techstock.loadSaleProducts(params.saleId as number);
-      setProductsInSales(result ?? []);
-    })();
-  }, []);
 
   useEffect(() => {
     if (products !== undefined) return;
@@ -68,7 +61,8 @@ function SalePage() {
 
     (async () => {
       const result = await techstock.loadSale(params.saleId as number);
-      setSale(result);
+      setSale(result.sale);
+      setProductsInSales(result.products);
       setIsFetching(false);
     })();
   }, []);
@@ -84,14 +78,33 @@ function SalePage() {
 
     console.log({ inputs, productsInSales });
     if (!sale) {
-      /* const res = await techstock.createSale(inputs); */
+      const res = await techstock.createSale(inputs, productsInSales ?? []);
       setIsLoadingSubmit(false);
-      /* location.href = `/sale/${res.id}`; */
+      location.href = `/sale/${res.id}`;
     } else {
       /* await techstock.updateSale({ ...sale, ...inputs }); */
       setSale({ ...sale, ...(inputs as any) });
       setIsLoadingSubmit(false);
     }
+  }
+
+  async function deleteSale() {
+    if (!sale) return;
+
+    if (!confirmingDeletion) {
+      setConfirmingDeletion(true);
+
+      setTimeout(() => {
+        setConfirmingDeletion(false);
+      }, 1000);
+      return;
+    }
+
+    setIsLoadingDeletion(true);
+    await techstock.deleteSale(sale.id);
+    setIsLoadingDeletion(false);
+
+    location.href = '/sales';
   }
 
   function getTotalPrice() {
@@ -156,6 +169,25 @@ function SalePage() {
         }
         backUrl="/sales"
       >
+        {sale && (
+          <Button
+            variation="error"
+            outlined={!confirmingDeletion}
+            onClick={deleteSale}
+            size="x-small"
+          >
+            Remover
+            {isLoadingDeletion && (
+              <ReactLoading
+                color="#0A0A0A"
+                type="spin"
+                height={15}
+                width={15}
+              />
+            )}
+          </Button>
+        )}
+
         <Button size="x-small" onClick={submitForm}>
           {sale ? 'Salvar alterações' : 'Registrar venda'}
 
@@ -195,9 +227,9 @@ function SalePage() {
               label="Data"
               type="datetime-local"
               placeholder="Data da venda"
-              {...register('datetime')}
+              {...register('date_time')}
               defaultValue={format(
-                sale?.datetime ?? new Date(),
+                sale?.date_time ?? new Date(),
                 'yyyy-MM-dd hh:mm'
               )}
             />

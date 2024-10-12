@@ -5,7 +5,7 @@ export type TSale = {
   name?: string;
   description?: string;
   discount?: number;
-  datetime: Date;
+  date_time: Date;
   totalValue: number;
 };
 
@@ -14,7 +14,7 @@ type TLoadSalesResponse = Array<{
   name?: string;
   description?: string;
   discount?: number;
-  datetime: string;
+  date_time: string;
   totalValue: number;
 }>;
 
@@ -22,10 +22,12 @@ export async function loadSales() {
   await (() => new Promise((resolve) => setTimeout(resolve, 1000)))();
   const response = await api.get<TLoadSalesResponse>('/sales');
 
-  const sales: TSale[] = response.data.map((sale) => ({
-    ...sale,
-    datetime: new Date(sale.datetime),
-  }));
+  const sales: TSale[] = response.data.map((sale) => {
+    return {
+      ...sale,
+      date_time: new Date(sale.date_time),
+    };
+  });
 
   return sales;
 }
