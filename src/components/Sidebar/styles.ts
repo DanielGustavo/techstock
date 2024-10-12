@@ -7,6 +7,7 @@ type TNavButton = {
 };
 
 export const Container = styled.aside`
+  position: relative;
   background: #0a0a0a;
   position: sticky;
   top: 0;
@@ -52,6 +53,10 @@ export const NavButton = styled(Link)<TNavButton>`
   align-items: center;
   gap: 12px;
 
+  div:has(svg) {
+    margin-left: auto;
+  }
+
   text-decoration: none;
   color: #aeaeae;
   border-radius: 10px;
@@ -87,4 +92,85 @@ export const NavButton = styled(Link)<TNavButton>`
       color: #fefefe;
     `;
   }}
+`;
+
+export const PdfView = styled.div`
+  position: absolute;
+  width: 100vw;
+  pointer-events: none;
+  color: #0a0a0a;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  z-index: -1;
+  padding: 24px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  p {
+    color: #0a0a0a;
+    font-weight: 400;
+    font-size: 14px;
+
+    span {
+      font-weight: 600;
+      color: #06f08d;
+    }
+  }
+
+  header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #191919;
+    padding-bottom: 24px;
+
+    small {
+      color: #0a0a0a;
+      font-weight: 600;
+      font-size: 11px;
+    }
+  }
+
+  ul {
+    list-style: none;
+
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+
+    li {
+      border: 1px solid #191919;
+      border-radius: 10px;
+      width: 100%;
+      padding: 10px;
+
+      color: #0a0a0a;
+      font-weight: 400;
+      font-size: 16px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      div {
+        display: flex;
+        flex-direction: row;
+      }
+
+      span {
+        font-weight: 600;
+      }
+    }
+  }
 `;

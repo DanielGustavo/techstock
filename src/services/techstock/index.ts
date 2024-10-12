@@ -14,3 +14,4 @@ export { updateProduct } from './updateProduct';
 export { updateSale } from './updateSale';
 export { login } from './login';
 export { signUp } from './signup';
+export { loadLogs } from './loadLogs';

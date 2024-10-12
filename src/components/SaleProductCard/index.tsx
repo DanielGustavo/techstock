@@ -51,7 +51,10 @@ function SaleProductCard({ product, onChange, maxQuantity }: TSaleProductCard) {
                 Preço: <span>R${product.price.toFixed(2)}</span>
               </li>
               <li>
-                Marca: <span>{product.brand?.name ?? '???'}</span>
+                Marca:{' '}
+                <span>
+                  {product.brand?.name ?? (product as any)?.brand ?? '???'}
+                </span>
               </li>
             </ul>
 
