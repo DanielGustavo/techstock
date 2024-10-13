@@ -61,7 +61,9 @@ function StockPage() {
         <S.EmptyContainer>
           <p>Nenhum produto cadastrado no estoque.</p>
           <Link to="/product">
-            <Button size="x-small" onClick={() => { }}>Adicionar Produto</Button>
+            <Button size="x-small" onClick={() => {}}>
+              Adicionar Produto
+            </Button>
           </Link>
         </S.EmptyContainer>
       )}

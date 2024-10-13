@@ -32,13 +32,17 @@ function SaleProductCard({ product, onChange, maxQuantity }: TSaleProductCard) {
         : input.valueAsNumber + 1;
     if (onChange) onChange(input.valueAsNumber);
   }
-
+  console.log({ product });
   return (
     <S.Container>
       <S.Body>
         <div>
           <S.ImageContainer>
-            <FeatherIcon icon="image" />
+            {product.thumbnailPathname ? (
+              <img src={product.thumbnailPathname} />
+            ) : (
+              <FeatherIcon icon="image" />
+            )}
           </S.ImageContainer>
 
           <S.Description>

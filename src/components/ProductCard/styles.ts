@@ -91,6 +91,13 @@ export const ImageContainer = styled.div`
   justify-content: center;
 
   color: #aeaeae;
+
+  overflow: hidden;
+  img {
+    max-width: 130px;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
 `;
 
 export const Footer = styled.footer`

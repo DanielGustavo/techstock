@@ -89,6 +89,19 @@ function ProductPage() {
 
     setIsLoadingSubmit(true);
 
+    let uploadFilename = undefined as undefined | string;
+
+    if (imageUrl) {
+      const uploadInput = document.querySelector(
+        '#productImage'
+      ) as HTMLInputElement;
+      const file = uploadInput.files && uploadInput.files[0];
+
+      if (file) {
+        uploadFilename = await techstock.uploadThumbnail(file);
+      }
+    }
+
     if (!product) {
       const res = await techstock.createProduct({
         name: inputs.name,
@@ -96,6 +109,7 @@ function ProductPage() {
         price: inputs.price,
         quantity: inputs.quantity,
         idBrand: inputs.brand,
+        thumbnailPathname: uploadFilename,
       });
       setIsLoadingSubmit(false);
       location.href = `/product/${res.id}`;
@@ -107,6 +121,7 @@ function ProductPage() {
         quantity: inputs.quantity,
         id: product.id,
         idBrand: inputs.brand || product.brand.id,
+        thumbnailPathname: uploadFilename,
       });
       setProduct({
         ...product,
@@ -122,6 +137,7 @@ function ProductPage() {
       setValue('price', inputs.price * 1.02);
     }
   }
+  console.log({ product });
 
   if (isFetching) {
     return (
@@ -222,8 +238,10 @@ function ProductPage() {
           <div>
             <h1>Preview</h1>
 
-            <S.ImageContainer filled={!!imageUrl}>
-              {!imageUrl ? (
+            <S.ImageContainer
+              filled={!!imageUrl || !!product?.thumbnailPathname}
+            >
+              {!imageUrl && !product?.thumbnailPathname ? (
                 <>
                   <span />
                   <FeatherIcon icon="image" size={100} strokeWidth={0.7} />
@@ -234,7 +252,7 @@ function ProductPage() {
                   </p>
                 </>
               ) : (
-                <img src={imageUrl} />
+                <img src={imageUrl || product?.thumbnailPathname} />
               )}
 
               <input

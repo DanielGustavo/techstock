@@ -5,7 +5,7 @@ export type TProduct = {
   name: string;
   description?: string;
   quantity: number;
-  thumbnail_pathname?: string;
+  thumbnailPathname?: string;
   price: number;
   brand: {
     id: number;
@@ -20,8 +20,8 @@ export async function loadProducts() {
   const response = await api.get<TLoadProductsResponse>('/products');
 
   response.data.forEach((product) => {
-    if (product.thumbnail_pathname) {
-      product.thumbnail_pathname = `http://localhost:3000/${product.thumbnail_pathname}`;
+    if (product.thumbnailPathname) {
+      product.thumbnailPathname = `http://localhost:8000/uploads/${product.thumbnailPathname}`;
     }
   });
 

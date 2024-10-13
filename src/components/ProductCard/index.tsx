@@ -50,7 +50,11 @@ function ProductCard({ product, onDelete }: TProductCard) {
       <S.Body>
         <div>
           <S.ImageContainer>
-            <FeatherIcon icon="image" />
+            {product.thumbnailPathname ? (
+              <img src={product.thumbnailPathname} />
+            ) : (
+              <FeatherIcon icon="image" />
+            )}
           </S.ImageContainer>
 
           <S.Description>

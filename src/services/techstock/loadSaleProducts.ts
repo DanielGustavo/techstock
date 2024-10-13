@@ -16,7 +16,7 @@ export async function loadSaleProducts(saleId: number) {
 
   response.data.forEach((product) => {
     if (product.thumbnail_pathname) {
-      product.thumbnail_pathname = `http://localhost:3000/${product.thumbnail_pathname}`;
+      product.thumbnail_pathname = `http://localhost:8000/${product.thumbnail_pathname}`;
     }
   });
 

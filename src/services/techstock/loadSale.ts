@@ -3,8 +3,8 @@ import { TProduct } from './loadProducts';
 import { TSale } from './loadSales';
 
 export type TProductSale = TProduct & {
-  saleproduct_id?: string
-}
+  saleproduct_id?: string;
+};
 
 type TLoadSaleResponse = {
   sale: {
@@ -26,6 +26,10 @@ export async function loadSale(id: number) {
     ...response.data.sale,
     date_time: new Date(response.data.sale.date_time),
   };
+
+  response.data.productSale.forEach((product) => {
+    product.thumbnailPathname = `http://localhost:8000/uploads/${(product as any).thumbnail_pathname}`;
+  });
 
   return { sale, products: response.data.productSale };
 }

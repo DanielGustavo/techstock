@@ -15,3 +15,4 @@ export { updateSale } from './updateSale';
 export { login } from './login';
 export { signUp } from './signup';
 export { loadLogs } from './loadLogs';
+export { uploadThumbnail } from './uploadThumbnail';

@@ -76,10 +76,17 @@ export const ImageContainer = styled.label<TImageContainer>`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 0;
+  padding: ${({ filled }) => (filled ? '0px' : '32px')} 0;
 
   svg {
     color: #aeaeae;
+  }
+
+  overflow: hidden;
+  img {
+    max-width: 260px;
+    aspect-ratio: 1;
+    object-fit: cover;
   }
 
   p {

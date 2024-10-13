@@ -75,6 +75,13 @@ export const ImageContainer = styled.div`
   justify-content: center;
 
   color: #aeaeae;
+
+  overflow: hidden;
+  img {
+    max-width: 96px;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
 `;
 
 export const NumberInput = styled.div`
