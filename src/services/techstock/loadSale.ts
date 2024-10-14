@@ -28,6 +28,8 @@ export async function loadSale(id: number) {
   };
 
   response.data.productSale.forEach((product) => {
+    if (!(product as any).thumbnail_pathname) return
+
     product.thumbnailPathname = `http://localhost:8000/uploads/${(product as any).thumbnail_pathname}`;
   });
 

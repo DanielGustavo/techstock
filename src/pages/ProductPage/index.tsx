@@ -29,6 +29,7 @@ function ProductPage() {
   const [brands, setBrands] = useState<TBrand[] | undefined>(undefined);
   const [product, setProduct] = useState<TProduct | undefined>(undefined);
   const params = useLoaderData() as { productId?: number };
+  const [filenameToDelete, setFilenameToDelete] = useState(undefined as undefined | string)
 
   const [isFetching, setIsFetching] = useState(!!params?.productId);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState(false);
@@ -49,6 +50,17 @@ function ProductPage() {
 
     (imgInput as any).value = '';
     imgInput.dispatchEvent(new Event('change', { bubbles: true }));
+
+
+    if (product) {
+      const pathnameParts = product.thumbnailPathname?.split('/')
+
+      if (pathnameParts) {
+        setFilenameToDelete(pathnameParts[pathnameParts.length - 1])
+      }
+
+      setProduct({ ...product, thumbnailPathname: undefined })
+    }
   }
 
   useEffect(() => {
@@ -102,6 +114,11 @@ function ProductPage() {
       }
     }
 
+    if (filenameToDelete) {
+      await techstock.deleteThumbnail(filenameToDelete)
+      setFilenameToDelete(undefined)
+    }
+
     if (!product) {
       const res = await techstock.createProduct({
         name: inputs.name,
@@ -114,25 +131,34 @@ function ProductPage() {
       setIsLoadingSubmit(false);
       location.href = `/product/${res.id}`;
     } else {
-      await techstock.updateProduct({
+      const req = {
         name: inputs.name,
         description: inputs.description,
         price: inputs.price,
         quantity: inputs.quantity,
         id: product.id,
-        idBrand: inputs.brand || product.brand.id,
-        thumbnailPathname: uploadFilename,
-      });
+        idBrand: inputs.brand || product.brand.id
+      }
+
+      if (uploadFilename) {
+        (req as any).thumbnailPathname = uploadFilename
+      } else if (product.thumbnailPathname) {
+        const pathnameParts = product.thumbnailPathname?.split('/')
+
+        if (pathnameParts) {
+          (req as any).thumbnailPathname = pathnameParts[pathnameParts.length - 1]
+        }
+      }
+
+      await techstock.updateProduct(req);
       setProduct({
         ...product,
         ...(inputs as any),
         price: inputs.price * 1.02,
+        thumbnailPathname: uploadFilename ? `http://localhost:8000/uploads/${uploadFilename}` : product.thumbnailPathname
       });
       setIsLoadingSubmit(false);
-
-      if (inputs.quantity === 0) {
-        location.href = '/stock';
-      }
+      setImageUrl(undefined)
 
       setValue('price', inputs.price * 1.02);
     }
@@ -226,9 +252,9 @@ function ProductPage() {
             defaultValue={
               product
                 ? {
-                    value: product?.brand?.id,
-                    label: product?.brand?.name,
-                  }
+                  value: product?.brand?.id,
+                  label: product?.brand?.name,
+                }
                 : undefined
             }
           />
