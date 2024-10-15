@@ -17,6 +17,7 @@ import { TProduct } from '../../services/techstock/loadProducts';
 import Select from '../../components/Select';
 import SaleProductCard from '../../components/SaleProductCard';
 import { TProductSale } from '../../services/techstock/loadSale';
+import { toast } from 'react-toastify';
 
 type TInputs = {
   name: string;
@@ -79,6 +80,16 @@ function SalePage() {
   }
 
   async function onSubmit(inputs: TInputs) {
+    if (!inputs.name) {
+      toast('Insira o nome da venda', { type: 'error' })
+      return
+    }
+
+    if (!productsInSales?.length) {
+      toast('Adicione pelo menos um produto', { type: 'error' })
+      return
+    }
+
     setIsLoadingSubmit(true);
 
     if (!sale) {
@@ -289,7 +300,7 @@ function SalePage() {
                 <SaleProductCard
                   product={product}
                   key={`${product.id}${index}`}
-                  maxQuantity={getProductMaxQuantity(product.id)}
+                  maxQuantity={sale ? undefined : getProductMaxQuantity(product.id)}
                   onChange={(value) => {
                     setProductsInSales((state) => {
                       const saleProduct = state?.find(

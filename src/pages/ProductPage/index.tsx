@@ -15,6 +15,7 @@ import * as S from './styles';
 import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom';
 import { TProduct } from '../../services/techstock/loadProducts';
+import { toast } from 'react-toastify';
 
 type TInputs = {
   name: string;
@@ -91,6 +92,21 @@ function ProductPage() {
   }
 
   async function onSubmit(inputs: TInputs) {
+    if (!inputs.name) {
+      toast('Insira o nome do produto', { type: 'error' })
+      return
+    }
+
+    if (inputs.price <= 0) {
+      toast('Defina o preço', { type: 'error' })
+      return
+    }
+
+    if (!inputs.brand && !product?.brand) {
+      toast('Insira uma marca', { type: 'error' })
+      return
+    }
+
     inputs.quantity = Number(inputs.quantity);
     inputs.price = Number(inputs.price);
 

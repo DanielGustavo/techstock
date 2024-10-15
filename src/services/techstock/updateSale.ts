@@ -12,7 +12,6 @@ export async function updateSale(
 
   sale.date_time = format(sale.date_time, 'dd/MM/yyyy hh:mm');
   const response = await api.put<TSale>('/sales', sale);
-
   console.log({ products });
   const productsInSaleBody = products.map((product) => ({
     quantity: product.quantity,
@@ -33,8 +32,14 @@ export async function updateSale(
   });
 
   const productsToCreate = productsInSaleBody.filter((product) => !product.id);
+
   if (productsToCreate.length) {
-    await api.post('/saleproducts', { products: productsToCreate });
+    const response = await api.post('/saleproducts', { products: productsToCreate });
+
+    response.data.forEach((saleProduct: any) => {
+      const product: any = products.find(({ id }) => id === saleProduct.idProduct)
+      if (product) product.saleproduct_id = saleProduct.id
+    })
   }
 
   return response.data;

@@ -7,7 +7,7 @@ import * as S from './styles';
 
 type TSaleProductCard = {
   product: TProduct;
-  maxQuantity: number;
+  maxQuantity?: number;
   onChange?: (value: number) => void;
 };
 
@@ -26,10 +26,15 @@ function SaleProductCard({ product, onChange, maxQuantity }: TSaleProductCard) {
     const input = numberInputRef.current;
     if (!input) return;
 
-    input.value =
-      input.valueAsNumber + 1 > maxQuantity
-        ? maxQuantity
-        : input.valueAsNumber + 1;
+    if (maxQuantity) {
+      input.value =
+        input.valueAsNumber + 1 > maxQuantity
+          ? maxQuantity
+          : input.valueAsNumber + 1;
+    } else {
+      input.value =  input.valueAsNumber + 1
+    }
+     
     if (onChange) onChange(input.valueAsNumber);
   }
   console.log({ product });
